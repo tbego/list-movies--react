@@ -1,0 +1,118 @@
+#listMovies {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding: 0px;
+    margin: 40px auto;
+
+    .cardMovie {
+        list-style: none;
+        margin: 0px 0px 40px 0px;
+        font-size: 0px;
+        display: flex;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        width: 46%;
+        background-color: #FFFFFF;
+        @include media-query(palm) {
+            width: 185px;
+        }
+
+        .image {
+            width: 185px;
+            @include media-query(palm) {
+                width: 100%;
+            }
+        }
+        .content {
+            font-size: initial;
+            text-align: left;
+            width: calc(100% - 205px);
+            padding: 12px 10px;
+            @include media-query(palm) {
+                display: none;
+            }
+
+            .info {
+                font-size: 0.9em;
+                margin: 0px auto 4px;
+                .title {
+                    color: #000000;
+                    text-decoration: none;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: inline-block;
+                    vertical-align: top;
+                    padding-right: 20px;
+                    width: calc(100% - 80px);
+                }
+                .vote_average {
+                    width: 50px;
+                    text-align: right;
+                    display: inline-block;
+                    &::after {
+                        content: "\2605";
+                        margin: 0px 0px 0px 2px;
+                    }
+                }
+            }
+            .meta {
+                color: #666;
+                font-size: 0.9em;
+                font-style: italic;
+                margin: 0px auto 20px;
+                .release_date {
+                    padding-right: 10px;
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 80px;
+                }
+                .genres {
+                    width: calc(100% - 100px);
+                    text-align: right;
+                    display: inline-block;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    font-style: italic;
+                }
+            }
+            .overview {
+                color: #666;
+                display: block; /* Fallback for non-webkit */
+            }
+            .view_more {
+                margin: 50px auto 0px;
+                text-align: right;
+                a {
+                    color: #000000;
+                    text-decoration: none;
+                    display: block;
+                    font-size: 14px;
+                    font-style: italic;
+                }
+            }
+        }
+    }
+}
+
+#listPages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    margin: auto;
+    li {
+        cursor: pointer;
+        padding: 4px;
+        width: 24px;
+        border-top: 1px solid #666;
+        border-bottom: 1px solid #666;
+        border-left: 1px solid #666;
+        &:last-child {
+            border-right: 1px solid #666;
+        }
+    }
+}

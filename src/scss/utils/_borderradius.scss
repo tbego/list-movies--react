@@ -1,0 +1,17 @@
+// border-radius()
+// ---------------
+// Cross-browser border radius.
+// The mixin takes any number of valid shorthand values.
+//
+// The mixin requires the _prefix.scss file to be included.
+//
+// Usage:
+//
+//     @include border-radius(5px);
+//     @include border-radius(5px 10px);
+//     @include border-radius(5px 10px 20px);
+//     @include border-radius(5px 10px 20px 30px);
+//
+@mixin border-radius($val...) {
+	@include prefix(border-radius, $val);
+}

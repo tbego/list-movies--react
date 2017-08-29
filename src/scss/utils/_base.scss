@@ -1,0 +1,43 @@
+// base()
+// --------
+// Tag resets and basic properties, outline.
+//
+html, body {
+
+}
+
+body {
+	border: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: normal;
+	margin: 0;
+	padding: 0;
+}
+
+ul, ol, li, h1, h2, h3, h4, h5, h6, p, figure, fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+ul, ol, li {
+	list-style-type: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary,
+div, h1, h2, h3, h4, h5, h6, ul, ol, li, form, input, textarea, label {
+	box-sizing:  border-box;
+}
+
+img {
+	max-width: 100%;
+}
+
+// outline on focusable elements
+a:focus {
+	outline:1px dotted #000;
+}
+button:focus, input:focus {
+	outline:1px dotted #000;
+}

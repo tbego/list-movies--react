@@ -1,0 +1,38 @@
+// _f6.scss
+// ========
+// Sensible SCSS foundation for every project.
+// This file imports all modules.
+//
+@charset "UTF-8";
+
+// Setup
+// -----
+@import "./normalize";
+@import "./base";
+
+// Mixins
+// ------
+@import "./fontface";
+@import "./fontsize";
+@import "./prefix";
+@import "./boxshadow";
+@import "./borderradius";
+@import "./transition";
+@import "./origin";
+@import "./gutters";
+
+// Components
+// -----
+@import "./formcomponents";
+
+// Modernizr
+// -----
+@import "./modernizr";
+
+// Responsive
+// -----
+@import "./responsive";
+
+// Helpers
+// -------
+@import "./helpers";

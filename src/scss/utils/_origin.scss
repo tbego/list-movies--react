@@ -1,0 +1,14 @@
+// origin()
+// --------
+// Transform-origin mixin.
+// The mixin takes any valid transform-origin value.
+//
+// The mixin requires the _prefix.scss file to be included.
+//
+// Usage:
+//
+//     @include origin();
+//
+@mixin origin($val) {
+	@include prefix("transform-origin", $val);
+}

@@ -1,0 +1,51 @@
+// _modernizr.scss
+// ===============
+
+// Modernizr mixin
+// ---------------
+@mixin modernizr($features, $supports) {
+	$everything-okay: true;
+	$prefix: if($supports, '', 'no-');
+	$selector: if($supports, '', (unquote('.no-js')));
+	$placeholder: if($supports, '%yep', '%nope');
+
+	@each $feature in $features {
+		@if type-of($feature) != string {
+			$everything-okay: false;
+			@warn '`#{$feature} is not a string for `modernizr`';
+		} @else {
+			$placeholder: $placeholder + '-' + $feature;
+			$new-selector: #{'.' + $prefix + $feature};
+			$selector: if($supports, $selector + $new-selector, append($selector, $new-selector, comma));
+		}
+	}
+
+	@if $everything-okay == true {
+		#{$placeholder} & {
+			@content;
+	}
+	@at-root #{$selector} {
+		@extend #{$placeholder};
+		}
+	}
+}
+
+// yep() and nope() mixins
+// -----------------------
+// Usage:
+//
+//     .my-selector {
+//         @include yep($features) { ... }
+//         @include nope($features) { ... }
+//     }
+@mixin yep($features) {
+	@include modernizr($features, $supports: true) {
+		@content;
+	}
+}
+
+@mixin nope($features) {
+	@include modernizr($features, $supports: false) {
+		@content;
+	}
+}

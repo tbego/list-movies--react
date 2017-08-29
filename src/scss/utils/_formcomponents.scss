@@ -1,0 +1,128 @@
+// Default theme for checkbox() and radio()
+// ----------------------------------------
+
+// Default checkbox style for the *enabled* state.
+.checkbox-default-enabled {
+	line-height: 1.2em;
+	padding: 0 0 0 1.5em;
+	margin: 0;
+	width: auto;
+	&:before, &:after {
+		content: "\00A0";
+		background-color: #ffffff;
+		top: 50%;
+		@include prefix(border-radius, 0.05em);
+	}
+	&:before {
+		border: 1px solid #999999;
+		width: 1.2em;
+		height: 1.2em;
+		left: 0;
+		margin-top: -0.6em;
+	}
+	&:after {
+		width: 0.3em;
+		height: 0.3em;
+		left: 0.45em;
+		margin-top: -0.15em;
+		opacity: 0;
+	}
+}
+
+// Default checkbox style for the *disabled* state.
+.checkbox-default-disabled {
+	@extend .checkbox-default-enabled;
+	cursor: default;
+	&:before {
+		@include prefix(opacity, 0.6);
+	}
+}
+
+// Default checkbox style for the *checked* state.
+.checkbox-default-checked {
+	&:before {
+		background-color: #cccccc;
+		border: 1px solid #333333;
+	}
+	&:after {
+		background-color: #333333;
+		width: 0.6em;
+		height: 0.6em;
+		left: 0.3em;
+		margin-top: -0.3em;
+		opacity: 1;
+	}
+}
+
+// Default radio style for the *enabled* state.
+.radio-default-enabled {
+	@extend .checkbox-default-enabled;
+	&:before, &:after {
+		@include prefix(border-radius, 50%);
+	}
+}
+
+// Default radio style for the *disabled* state.
+.radio-default-disabled {
+	@extend .checkbox-default-disabled;
+	&:before, &:after {
+		@include prefix(border-radius, 50%);
+	}
+}
+
+// Default radio style for the *checked* state.
+.radio-default-checked {
+	@extend .checkbox-default-checked;
+	&:before, &:after {
+		@include prefix(border-radius, 50%);
+	}
+}
+
+// checkbox()
+// ----------
+// Custom checkbox.
+@mixin checkbox($enabled:checkbox-default-enabled, $disabled:checkbox-default-disabled, $checked:checkbox-default-checked) {
+	position: absolute;
+	left: -9000px;
+	+ label {
+		cursor: pointer;
+		display: inline-block;
+		position: relative;
+		width: auto;
+		&:before {
+			box-sizing: border-box;
+			cursor: pointer;
+			display: inline-block;
+			position: absolute;
+			text-align: center;
+			@include prefix(transition, all 0.1s);
+		}
+		&:after {
+			position: absolute;
+			box-sizing: border-box;
+			@include prefix(transition, all 0.2s);
+		}
+		@extend .#{$enabled};
+	}
+	&:checked {
+		+ label {
+			@extend .#{$checked};
+		}
+	}
+	&:disabled {
+		+ label {
+			cursor: default;
+			&:before {
+				cursor: default;
+			}
+			@extend .#{$disabled};
+		}
+	}
+}
+
+// radio()
+// -------
+// Custom radio button.
+@mixin radio($enabled:radio-default-enabled, $disabled:radio-default-disabled, $checked:radio-default-checked) {
+	@include checkbox($enabled, $disabled, $checked);
+}

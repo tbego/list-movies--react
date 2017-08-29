@@ -1,0 +1,71 @@
+// font-size()
+// -----------
+// Font size defined in `rem` from a value in `px`.
+// Given a pixel font-size and optional line-height, the mixin returns the size in `rem`.
+// Default line-height is 1, can be set to any valid value.
+//
+// Usage:
+// sans - pas la peine de passer le "false"
+// @include font-size(16px);
+// avec - en passant une valeur
+// @include font-size(16px, 2em);
+// Base font size and `rem` base font multiplicator.
+// > Psd font-size px = web px = web rem (ci-dessous)
+// > font-size: (($font-size + ($font-size * 0.071)) / $base-font-size)*$base-font-multiplicator;
+
+$base-font-size:          		12px!default;
+$base-font-multiplicator: 		0.7rem!default;
+
+@mixin font-size($font-size, $line-height:"") {
+	font-size: $font-size;
+	font-size: ($font-size / $base-font-size)*$base-font-multiplicator;
+	@if $line-height != "" {
+		line-height: $line-height;
+	} @else {
+		line-height: 1;
+	}
+}
+
+// linear interpolation function
+// -----------
+// Takes 4 arguments : min width, max width, min size and max size.
+// interpolates a numeric value based between min and max size, constrained by min and max width.
+// Can be used for any single numeric value-based property (font-size, padding-*, margin-*..).
+//
+// Usage:
+// {property}: interpolatevw(768, 1024, 12, 60);
+
+@function interpolatevw($wmin, $wmax, $amin, $amax) {
+  @return calc(#{$amin} * 1px + ((100vw - #{$wmin} * 1px)/(#{$wmax} - #{$wmin}))*(#{$amax} - #{$amin}));
+}
+
+// linear font-size
+// -----------
+// Takes 3 arguments : break point keyword, min size and max size.
+// Wrapps the above linear interpolation function in a media-query call, and sets min and max width accordingly.
+// The media-query mixin works with pre-defined keywords.
+//
+// Usage:
+// @include linearfontsize(palm, 12, 18);
+// @include linearfontsize(lap, 18, 22);
+// @include linearfontsize(desk, 22, 30);
+
+@mixin linearfontsize($break, $minfs, $maxfs) {
+	$minbp: 0;
+	$maxbp: 0;
+
+	@if $break == palm or $break == palm-pt or $break == palm-ld {
+		$minbp: 320;
+		$maxbp: 767;
+	} @else if $break == lap or $break == lap-pt or $break == lap-ld {
+		$minbp: 768;
+		$maxbp: 1024;
+	} @else if $break == desk or $break == desk-wide {
+		$minbp: 1025;
+		$maxbp: 2000;
+	}
+
+	@include media-query($break) {
+        font-size: interpolatevw($minbp,$maxbp,$minfs,$maxfs);
+    }
+}

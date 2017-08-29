@@ -1,0 +1,16 @@
+// box-shadow()
+// ------------
+// Cross-browser box shadow.
+// The mixin takes any number of valid shorthand values.
+//
+// The mixin requires the _prefix.scss file to be included.
+//
+// Usage:
+//
+//     @include box-shadow(5px 5px #000);
+//     @include box-shadow(5px 5px 5px #000);
+//     @include box-shadow(5px 5px 5px #000, 1px 1px 1px #fff, 3px 3px 3px #fff);
+//
+@mixin box-shadow($val...) {
+	@include prefix(box-shadow, $val);
+}

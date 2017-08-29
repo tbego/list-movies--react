@@ -1,0 +1,25 @@
+// transition()
+// ------------
+// Shorthand transition mixin.
+//
+// The mixin requires the _prefix.scss file to be included.
+//
+// Usage:
+//
+//     @include transition-property(left, 0.5s, ease-out);
+//
+@mixin transition-property($property, $duration, $ease) {
+	@if  $property == transform {
+		-webkit-transition-property: -webkit-transform;
+		-moz-transition-property: -moz-transform;
+		-o-transition-property: -o-transform;
+		-ms-transition-property: -ms-transform;
+		transition-property: transform;
+	} @else {
+		@include prefix("transition-property", $property);
+	}
+
+	@include prefix("transition-duration", $duration);
+
+	@include prefix("transition-timing-function", $ease);
+}

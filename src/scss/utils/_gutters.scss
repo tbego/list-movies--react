@@ -1,0 +1,39 @@
+// gutters()
+// -------
+// Smart gutter distribution.
+//
+// **Parameters**  | **Description**
+// ----------------|----------------
+// `$col-max`      | Total number of `.grid-item` elements in `.grid`
+// `$col-min`      | Number of `.grid-item` in a row
+// `$gutter-width` | Desired gutter width
+//
+// Usage:
+//
+//     .grid {
+//         @include media-query(desk) {
+//             @include gutters(6, 6, 2rem);
+//         }
+//         @include media-query(lap) {
+//             @include gutters(6, 3, 2rem);
+//         }
+//     }
+@mixin gutters($col-max, $col-min, $gutter-width) {
+	.item {
+		@if $col-min > 1 {
+			$i : 0;
+			@for $group from 0 to $col-max / $col-min {
+				@for $col from 1 through $col-min {
+					&:nth-child(#{$col + $i}) {
+						padding-left:  $gutter-width * (($col - 1) / $col-min);
+						padding-right: $gutter-width * (($col-min - $col) / $col-min);
+					}
+				}
+				$i : $i + $col-min;
+			}
+		} @else {
+			padding-left:  0;
+			padding-right: 0;
+		}
+	}
+}

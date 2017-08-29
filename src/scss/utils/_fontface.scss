@@ -1,0 +1,29 @@
+// font-face()
+// -----------
+// Standard font import.
+// Pass a path, filename and alias to the mixin and it will load each .eot, .woff and .ttf file found.
+// Optional weight value can be passed as well, will default to 400 otherwise.
+//
+// Usage:
+//
+//     @include font-face("/path/to/fonts", some_font, "my_font", 400);
+//
+//     .my_font {font-family: "my_font";}
+//
+@mixin font-face($base-url, $font-filename, $font-aliasname, $weight:false) {
+	@font-face {
+		font: {
+			family: $font-aliasname;
+			style: normal;
+			@if $weight == true {
+				weight: $weight;
+			} @else {
+				weight: 400;
+			}
+		}
+		src: url($base-url + "/" + $font-filename + ".eot");
+		src: url($base-url + "/" + $font-filename + ".eot?#stopIE678here") format('forceIE9woff'),
+		url($base-url + "/" + $font-filename + ".woff") format("woff"),
+		url($base-url + "/" + $font-filename + ".ttf") format("truetype");
+	}
+}

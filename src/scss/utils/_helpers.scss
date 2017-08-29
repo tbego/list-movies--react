@@ -1,0 +1,43 @@
+// _helpers.scss
+// =============
+// Helper classes.
+
+// inline-block
+// ------------
+.inbl {
+	display:inline-block;
+	*display:inline;
+	vertical-align:middle;
+	*zoom:1;
+}
+
+// naked
+// -----
+.naked {
+	border:none;
+	margin:0;
+	padding:0;
+}
+
+// margin centered
+// ---------------
+.centered {
+	margin:0 auto;
+}
+
+// hidden
+// ------
+.hidden, .phone-hidden {
+	display: none !important;
+	visibility: hidden;
+}
+
+// cleared
+// -------
+.cleared {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
